@@ -60,9 +60,9 @@ def __verify_dir(config: NamerConfig, name: str, other_dirs: List[str]) -> bool:
     dir_name: Optional[Path] = getattr(config, name) if hasattr(config, name) else None
     if dir_name and (not dir_name.is_dir() or str(dir_name).startswith(path_list)):
         logger.error(f'Configured directory {name}: "{dir_name}" is not a directory or not exist or in other watchdog directory')
-
+        """
         return False
-
+        """
     min_size = config.min_file_size if config.min_file_size else 1
     if dir_name and name == 'work_dir' and sum(file.stat().st_size for file in config.work_dir.rglob('*')) / 1024 / 1024 > min_size:
         logger.error(f'Configured directory {name}: "{dir_name}" should be empty')
